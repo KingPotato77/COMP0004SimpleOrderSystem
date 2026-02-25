@@ -55,7 +55,7 @@ public class SimpleOrderSystem
          addOrder();
         break;
       case ADD_PRODUCT:
-         addProduct();
+        //  addProduct();
          break;
       case LIST_CUSTOMERS:
         listCustomers();
@@ -185,6 +185,8 @@ public class SimpleOrderSystem
     return null;
   }
 
+  // Boilerplate 
+  /*
   private void addProduct()
   {
     System.out.print("Enter product code: ");
@@ -201,7 +203,43 @@ public class SimpleOrderSystem
     in.nextLine();
     Product product = new Product(code,description,price);
     products.add(product);
-  }
+  } */
+
+    private void addBento()
+  {
+    System.out.print("Enter product code: ");
+    int code = in.nextInt();
+    in.nextLine();
+    if (!isAvailableProductCode(code))
+    {
+      return;
+    }
+    System.out.print("Enter product description: ");
+    String description = in.nextLine();
+    System.out.print("Enter product price: ");
+    int price = in.nextInt();
+    in.nextLine();
+    Product product = new Bento(code,price,description);
+    products.add(product);
+  } 
+
+  private void addDrink()
+  {
+    System.out.print("Enter product code: ");
+    int code = in.nextInt();
+    in.nextLine();
+    if (!isAvailableProductCode(code))
+    {
+      return;
+    }
+    System.out.print("Enter product description: ");
+    String description = in.nextLine();
+    System.out.print("Enter product price: ");
+    int price = in.nextInt();
+    in.nextLine();
+    Product product = new Drink(code,price,description);
+    products.add(product);
+  } 
 
   private boolean isAvailableProductCode(int code)
   {
@@ -237,6 +275,7 @@ public class SimpleOrderSystem
   }
 
   public void addExampleData() {
+    /*
     Product exProduct1 = new Product(001, "Katsu Curry", 8);
     Product exProduct2 = new Product(002, "Sweet Chili Chicken", 7);
 
@@ -264,6 +303,7 @@ public class SimpleOrderSystem
     this.customers.add(exCustomer1);
     this.customers.add(exCustomer2);
     this.customers.add(exCustomer3);
+    */
   }
 
   public void overallTotal() {
