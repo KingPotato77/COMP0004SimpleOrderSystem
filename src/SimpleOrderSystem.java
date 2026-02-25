@@ -6,6 +6,7 @@ public class SimpleOrderSystem
   public static final int ADD_ORDER = 2;
   public static final int ADD_PRODUCT = 3;
   public static final int LIST_CUSTOMERS = 4;
+  public static final int OVERALL_TOTAL = 5;
   public static final int QUIT = 10;
   private Input in = new Input();
   private ArrayList<Customer> customers;
@@ -38,6 +39,7 @@ public class SimpleOrderSystem
     System.out.println(ADD_ORDER + ". Add Order");
     System.out.println(ADD_PRODUCT + ". Add Product");
     System.out.println(LIST_CUSTOMERS + ". List Customers");
+    System.out.println(OVERALL_TOTAL + ". Overall Total");
     System.out.println();
     System.out.println(QUIT + ". Quit");
   }
@@ -57,6 +59,9 @@ public class SimpleOrderSystem
          break;
       case LIST_CUSTOMERS:
         listCustomers();
+        break;
+      case OVERALL_TOTAL:
+        overallTotal();
         break;
       default:
         System.out.println("Invalid option - try again");
@@ -228,9 +233,52 @@ public class SimpleOrderSystem
     }
   }
 
+  public void addExampleData() {
+    Product exProduct1 = new Product(001, "Katsu Curry", 8);
+    Product exProduct2 = new Product(002, "Sweet Chili Chicken", 7);
+
+    this.products.add(exProduct1);
+    this.products.add(exProduct2);
+
+    LineItem exLItem1 = new LineItem(1, exProduct1);
+    LineItem exLItem2 = new LineItem(2, exProduct2);
+
+    Order exOrder1 = new Order();
+    Order exOrder2 = new Order();
+
+    exOrder1.add(exLItem1);
+    exOrder2.add(exLItem2);
+
+    Customer exCustomer1 = new Customer("Guille", "Arevalo", "Tavistock Square 45", "722528754", "guillermo.arevalo.fdz@gmail.com");
+    Customer exCustomer2 = new Customer("Ethan", "Sell", "Tavistock Square 45", "123456789", "email@gmail.com");
+    Customer exCustomer3 = new Customer("Wok", "DiGregori", "Tavistock Square 45", "987654321", "otroemail@gmail.com");
+
+    exCustomer1.addOrder(exOrder2);
+    exCustomer1.addOrder(exOrder1);
+    exCustomer2.addOrder(exOrder2);
+    exCustomer3.addOrder(exOrder1);
+
+    this.customers.add(exCustomer1);
+    this.customers.add(exCustomer2);
+    this.customers.add(exCustomer3);
+  }
+
+  public void overallTotal() {
+    int total = 0;
+
+    for (Customer customer : this.customers) {
+      for (Order order: customer.getOrders()) {
+        total += order.getTotal();
+      }
+    }
+
+    System.out.println("Overall total is: "+total);
+  }
+
   public static void main(String[] args)
   {
     SimpleOrderSystem orderSystem = new SimpleOrderSystem();
+    orderSystem.addExampleData();
     orderSystem.run();
   }
 }
