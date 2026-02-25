@@ -85,11 +85,13 @@ public class SimpleOrderSystem
     String lastName = in.nextLine();
     System.out.println("Enter address:");
     String address = in.nextLine();
+    System.out.println("Enter postcode:");
+    String postcode = in.nextLine();
     System.out.println("Enter phone number:");
     String phone = in.nextLine();
     System.out.println("Enter email address:");
     String email = in.nextLine();
-    Customer customer = new Customer(firstName,lastName,address,phone,email);
+    Customer customer = new Customer(firstName,lastName,address,postcode,phone,email);
     customers.add(customer);
   }
 
@@ -226,6 +228,7 @@ public class SimpleOrderSystem
                                   + ", "
                                   + customer.getFirstName());
       System.out.println("Address: " + customer.getAddress());
+      System.out.println("Postcode: " + customer.getPostcode());
       System.out.println("Phone: " + customer.getPhone());
       System.out.println("Email: " + customer.getEmail());
       System.out.println("Orders made: " + customer.getOrders().size());
@@ -249,9 +252,9 @@ public class SimpleOrderSystem
     exOrder1.add(exLItem1);
     exOrder2.add(exLItem2);
 
-    Customer exCustomer1 = new Customer("Guille", "Arevalo", "Tavistock Square 45", "722528754", "guillermo.arevalo.fdz@gmail.com");
-    Customer exCustomer2 = new Customer("Ethan", "Sell", "Tavistock Square 45", "123456789", "email@gmail.com");
-    Customer exCustomer3 = new Customer("Wok", "DiGregori", "Tavistock Square 45", "987654321", "otroemail@gmail.com");
+    Customer exCustomer1 = new Customer("Guille", "Arevalo", "Tavistock Square 45", "WC1H 9EX", "722528754", "guillermo.arevalo.fdz@gmail.com");
+    Customer exCustomer2 = new Customer("Ethan", "Sell", "Tavistock Square 45", "WC1H 9EX","123456789", "email@gmail.com");
+    Customer exCustomer3 = new Customer("Wok", "DiGregori", "Tavistock Square 45", "WC1H 9EX","987654321", "otroemail@gmail.com");
 
     exCustomer1.addOrder(exOrder2);
     exCustomer1.addOrder(exOrder1);
@@ -278,7 +281,10 @@ public class SimpleOrderSystem
   public static void main(String[] args)
   {
     SimpleOrderSystem orderSystem = new SimpleOrderSystem();
+
+    // Adding example data to work with
     orderSystem.addExampleData();
+    
     orderSystem.run();
   }
 }
